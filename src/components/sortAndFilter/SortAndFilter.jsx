@@ -2,7 +2,7 @@ import "./SortAndFilter.css"
 
 const SortAndFilter = () => {
   return (
-    <div>SortAndFilter</div>
+    <div className="sort_and_filter">SortAndFilter</div>
   )
 }
 

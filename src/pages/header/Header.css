@@ -22,8 +22,24 @@
   text-decoration: none;
 }
 .header_sorting {
+  /* position: relative; */
   width: 40%;
   background-color: #2b54e4;
   color: #ffffff;
   cursor: pointer;
+}
+
+.sorting_and_filter_section {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 70%;
+  height: 100%;
+  transition: translate 0.3s ease-in-out;
+  translate: 100%;
+}
+
+.sorting_and_filter_section.open {
+  translate: 0%;
 }
