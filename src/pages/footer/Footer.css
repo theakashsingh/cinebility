@@ -1,0 +1,21 @@
+.footer {
+  width: 100%;
+  height: 50px;
+  background-color: #2b54e4;
+  color: #ffffff;
+  display: flex;
+}
+
+.footer .footer_link {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 400;
+}
+.footer_link:first-child {
+  border-right: 1px solid #ffffff;
+}

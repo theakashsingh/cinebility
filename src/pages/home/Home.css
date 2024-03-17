@@ -1,0 +1,9 @@
+.home {
+  width: 100%;
+  height: calc(100% - 100px);
+  overflow: auto;
+}
+
+.home::-webkit-scrollbar {
+    display: none;
+}

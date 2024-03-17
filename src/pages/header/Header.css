@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 16px;
+  font-weight: 400;
+  box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.2);
+}
+
+.header_title,
+.header_sorting {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header_title {
+  width: 60%;
+  color: #000;
+  background-color: #ffffff;
+  text-decoration: none;
+}
+.header_sorting {
+  width: 40%;
+  background-color: #2b54e4;
+  color: #ffffff;
+  cursor: pointer;
+}
