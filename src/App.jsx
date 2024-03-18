@@ -39,7 +39,7 @@ function App() {
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
-        dispatch(checkOnlineMode)
+        dispatch(checkOnlineMode(navigator.onLine))
     };
 
     window.addEventListener("online", handleOnlineStatusChange);

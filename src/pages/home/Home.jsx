@@ -11,11 +11,13 @@ const Home = () => {
   const homeRef = useRef(null);
   const updatedMovieList = useSelector(state => state.movie.movies);
   const isOnline = useSelector(state => state.movie.isOnline);
+  const sortingValue = useSelector(state => state.movie.sorting);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isOnline) return;
-    dispatch(getMovies({ pageNo: page }));
-  }, [page]);
+    dispatch(getMovies({ pageNo: page, sorting: sortingValue }));
+    console.log({ sortingValue });
+  }, [page, sortingValue]);
 
   const handleInfiniteScroll = () => {
     const container = homeRef.current;
@@ -44,7 +46,6 @@ const Home = () => {
     setMovieList(movies);
   }, [updatedMovieList.list]);
 
-  // console.log(movieList);
   return (
     <div className="home" ref={homeRef}>
       {movieList &&

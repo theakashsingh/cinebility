@@ -22,6 +22,7 @@ const initialState = {
   wishlist: [],
   favorites: [],
   isOnline: navigator.onLine,
+  sorting:""
 };
 
 const movieSlice = createSlice({
@@ -74,9 +75,13 @@ const movieSlice = createSlice({
         state.wishlist = [...state.wishlist, selectedWishlist[0]];
       }
     },
+    setSortingValue : (state,action)=>{
+        state.sorting = action.payload
+        state.movies.list = []
+    }
   },
 });
 
-export const { checkOnlineMode, selectFavorites, selectWishlist } =
+export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue} =
   movieSlice.actions;
 export default movieSlice.reducer;

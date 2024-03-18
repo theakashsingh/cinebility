@@ -3,7 +3,7 @@ import "./Favorites.css"
 import MovieCard from "../../components/card/MovieCard"
 
 const Favorites = () => {
-  const favoritesMovie = useSelector(state=>state.movie.wishlist)
+  const favoritesMovie = useSelector(state=>state.movie.favorites)
   return (
     <div className="favorites">
        {
