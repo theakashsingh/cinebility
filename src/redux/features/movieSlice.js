@@ -22,7 +22,8 @@ const initialState = {
   wishlist: [],
   favorites: [],
   isOnline: navigator.onLine,
-  sorting:""
+  sorting:"",
+  
 };
 
 const movieSlice = createSlice({

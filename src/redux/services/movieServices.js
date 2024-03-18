@@ -5,10 +5,10 @@ const movieServices = {
     const { pageNo, sorting } = credentials;
     let url;
     if (sorting) {
-      url = `popular?language=en-US&page=${pageNo}&sort_by=${sorting}`;
+      url = `discover/movie?language=en-US&page=${pageNo}&sort_by=${sorting}`;
       console.log({ url });
     } else {
-      url = `popular?language=en-US&page=${pageNo}`;
+      url = `movie/popular?language=en-US&page=${pageNo}`;
     }
     const response = await axiosInstance.get(url);
     console.log(response.data);
