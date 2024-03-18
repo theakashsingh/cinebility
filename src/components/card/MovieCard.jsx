@@ -7,13 +7,19 @@ import { FcLike } from "react-icons/fc";
 import { FaBookmark } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import {
+  selectFavorites,
+  selectWishlist,
+} from "../../redux/features/movieSlice";
 
-const MovieCard = ({ movieInfo }) => {
+const MovieCard = ({ movieInfo, isAction }) => {
   const [player, setPlayer] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false);
   const playerRef = useRef(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const options = {
@@ -56,11 +62,14 @@ const MovieCard = ({ movieInfo }) => {
     },
   };
 
-  const handleFavorites = () => {
+  const handleFavorites = id => {
     setIsFavorites(!isFavorites);
+    // console.log({ id });
+    dispatch(selectFavorites(id));
   };
-  const handleWishList = () => {
+  const handleWishList = id => {
     setIsWishlist(!isWishlist);
+    dispatch(selectWishlist(id));
   };
   return (
     <div ref={playerRef} className="movie_card">
@@ -74,23 +83,31 @@ const MovieCard = ({ movieInfo }) => {
         </div>
         <div></div>
       </div>
-      <div className="movie_action">
-        <div className="movie_rating">
-          <FaRegStar />
-          <FaRegStar />
-          <FaRegStar />
-          <FaRegStar />
-          <FaRegStar />
+      {isAction && (
+        <div className="movie_action">
+          <div className="movie_rating">
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+            <FaRegStar />
+          </div>
+          <div
+            className="movie_favorites"
+            onClick={() => handleFavorites(movieInfo.id)}
+          >
+            {isFavorites ? <FcLike /> : <FcLikePlaceholder />}{" "}
+            <span>Favorites</span>
+          </div>
+          <div
+            className="movie_wishlist"
+            onClick={() => handleWishList(movieInfo.id)}
+          >
+            {isWishlist ? <FaBookmark /> : <FaRegBookmark />}{" "}
+            <span>Wishlist</span>
+          </div>
         </div>
-        <div className="movie_favorites" onClick={handleFavorites}>
-          {isFavorites ? <FcLike /> : <FcLikePlaceholder />}{" "}
-          <span>Favorites</span>
-        </div>
-        <div className="movie_wishlist" onClick={handleWishList}>
-          {isWishlist ? <FaBookmark /> : <FaRegBookmark />}{" "}
-          <span>Wishlist</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,8 +1,21 @@
+import { useSelector } from "react-redux"
 import "./Favorites.css"
+import MovieCard from "../../components/card/MovieCard"
 
 const Favorites = () => {
+  const favoritesMovie = useSelector(state=>state.movie.wishlist)
   return (
-    <div className="favorites">Favorites</div>
+    <div className="favorites">
+       {
+        favoritesMovie && favoritesMovie.map((movieInfo, id) => (
+          <MovieCard
+            key={`${movieInfo.videoKey}_${id}`}
+            movieInfo={movieInfo}
+            isAction={false}
+          />
+        ))
+      }
+    </div>
   )
 }
 

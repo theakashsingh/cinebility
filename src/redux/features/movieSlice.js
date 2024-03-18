@@ -42,14 +42,41 @@ const movieSlice = createSlice({
     });
   },
   reducers: {
-      checkOnlineMode:(state,action)=>{
-          state.isOnline = action.payload
-      },
-      // selectFavorites:(state,action)=>{
-          
-      // }
+    checkOnlineMode: (state, action) => {
+      state.isOnline = action.payload;
+    },
+    selectFavorites: (state, action) => {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+      console.log(movies.some(item => item.id === action.payload));
+      if (state.favorites.some(item => item.id === action.payload)) {
+        state.favorites = state.favorites.filter(
+          item => item.id !== action.payload
+        );
+      } else {
+        console.log({ movies }, action.payload);
+        const selectedFavorites = movies.filter(
+          item => item.id === action.payload
+        );
+        state.favorites = [...state.favorites, selectedFavorites[0]];
+      }
+    },
+    selectWishlist: (state, action) => {
+      const movies = JSON.parse(localStorage.getItem("movies"));
+
+      if (state.wishlist.some(item => item.id === action.payload)) {
+        state.wishlist = state.wishlist.filter(
+          item => item.id !== action.payload
+        );
+      } else {
+        const selectedWishlist = movies.filter(
+          item => item.id === action.payload
+        );
+        state.wishlist = [...state.wishlist, selectedWishlist[0]];
+      }
+    },
   },
 });
 
-export const {checkOnlineMode} = movieSlice.actions
+export const { checkOnlineMode, selectFavorites, selectWishlist } =
+  movieSlice.actions;
 export default movieSlice.reducer;

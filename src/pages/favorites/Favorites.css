@@ -1,5 +1,13 @@
 .favorites{
-    width: 100%;
-    height: calc(100% - 100px);
-  }
-  
+  width: 100%;
+  height: calc(100% - 100px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+}
+
+.home::-webkit-scrollbar {
+  display: none;
+}

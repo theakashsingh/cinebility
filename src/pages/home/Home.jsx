@@ -52,6 +52,7 @@ const Home = () => {
           <MovieCard
             key={`${movieInfo.videoKey}_${id}`}
             movieInfo={movieInfo}
+            isAction={true}
           />
         ))}
 
