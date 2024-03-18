@@ -19,8 +19,9 @@ const initialState = {
     list: [],
     error: null,
   },
-  wishlist: {},
-  favorites: {},
+  wishlist: [],
+  favorites: [],
+  isOnline: navigator.onLine,
 };
 
 const movieSlice = createSlice({
@@ -31,13 +32,24 @@ const movieSlice = createSlice({
       state.movies.loading = true;
     }),
       builder.addCase(getMovies.fulfilled, (state, action) => {
-        state.movies.list = [...state.movies.list, ...action.payload];
+        const updatedList = [...state.movies.list, ...action.payload];
+        state.movies.list = updatedList;
+        localStorage.setItem("movies", JSON.stringify(updatedList));
         state.movies.loading = false;
       });
     builder.addCase(getMovies.rejected, (state, action) => {
       (state.movies.loading = false), (state.movies.error = action.payload);
     });
   },
+  reducers: {
+      checkOnlineMode:(state,action)=>{
+          state.isOnline = action.payload
+      },
+      // selectFavorites:(state,action)=>{
+          
+      // }
+  },
 });
 
+export const {checkOnlineMode} = movieSlice.actions
 export default movieSlice.reducer;

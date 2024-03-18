@@ -1,0 +1,31 @@
+.movie_card {
+  width: 100%;
+  height: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie_image {
+  height: 100%;
+  width: 100%;
+}
+
+.movie_action {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 5px;
+}
+
+.movie_rating {
+  display: flex;
+  gap: 3px;
+}
+.movie_favorites,
+.movie_wishlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}

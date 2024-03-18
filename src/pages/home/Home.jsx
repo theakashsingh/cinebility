@@ -7,10 +7,13 @@ import Loading from "../../components/LoadingAnimation/Loading";
 
 const Home = () => {
   const [page, setPage] = useState(1);
+  const [movieList, setMovieList] = useState([]);
   const homeRef = useRef(null);
-  const movieList = useSelector(state => state.movie.movies);
+  const updatedMovieList = useSelector(state => state.movie.movies);
+  const isOnline = useSelector(state => state.movie.isOnline);
   const dispatch = useDispatch();
   useEffect(() => {
+    if (!isOnline) return;
     dispatch(getMovies({ pageNo: page }));
   }, [page]);
 
@@ -25,22 +28,34 @@ const Home = () => {
     }
   };
   useEffect(() => {
-    homeRef.current.addEventListener("scroll", handleInfiniteScroll);
+    if (homeRef.current) {
+      homeRef?.current.addEventListener("scroll", handleInfiniteScroll);
+    }
 
     return () => {
-      homeRef.current.removeEventListener("scroll", handleInfiniteScroll);
+      if (homeRef.current) {
+        homeRef?.current.removeEventListener("scroll", handleInfiniteScroll);
+      }
     };
   }, []);
 
-  console.log(movieList);
+  useEffect(() => {
+    const movies = JSON.parse(localStorage.getItem("movies"));
+    setMovieList(movies);
+  }, [updatedMovieList.list]);
+
+  // console.log(movieList);
   return (
     <div className="home" ref={homeRef}>
-      {movieList.list &&
-        movieList.list.map(movieInfo => (
-          <MovieCard key={movieInfo.id} movieInfo={movieInfo} />
+      {movieList &&
+        movieList?.map((movieInfo, id) => (
+          <MovieCard
+            key={`${movieInfo.videoKey}_${id}`}
+            movieInfo={movieInfo}
+          />
         ))}
 
-      {movieList.loading && <Loading />}
+      {updatedMovieList.loading && <Loading />}
     </div>
   );
 };

@@ -3,7 +3,12 @@ import "./App.css";
 import Layout from "./Layout";
 import Home from "./pages/home/Home";
 import WishList from "./pages/wishlist/Wishlist";
-import Favorites from "./pages/favorites/Favorites"
+import Favorites from "./pages/favorites/Favorites";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch, useSelector } from "react-redux";
+import { checkOnlineMode } from "./redux/features/movieSlice";
 
 const router = createBrowserRouter([
   {
@@ -27,9 +32,39 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  // const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [initialToastShown, setInitialToastShown] = useState(false);
+  const isOnline = useSelector(state => state.movie.isOnline);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+        dispatch(checkOnlineMode)
+    };
+
+    window.addEventListener("online", handleOnlineStatusChange);
+    window.addEventListener("offline", handleOnlineStatusChange);
+
+    return () => {
+      window.removeEventListener("online", handleOnlineStatusChange);
+      window.removeEventListener("offline", handleOnlineStatusChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!initialToastShown && isOnline) {
+      setInitialToastShown(true);
+    } else if (isOnline) {
+      toast("You are now in online mode.!");
+    }else{
+      toast("You are now in offline mode.");
+    }
+  }, [isOnline])
+  
   return (
     <div className="app">
       <RouterProvider router={router} />
+      <ToastContainer />
     </div>
   );
 }
