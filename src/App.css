@@ -13,7 +13,7 @@
   position: relative;
   width: 540px;
   min-width: 540px;
-  height: 100vh;
+  height: 100dvh;
   background-color: #d9d9d9;
   display: flex;
   flex-direction: column;
