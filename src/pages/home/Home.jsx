@@ -64,7 +64,7 @@ const Home = () => {
           />
         ))}
 
-      {updatedMovieList.loading && <Loading />}
+      {updatedMovieList.loading &&  <div className="infinite_loading"><Loading /></div>}
     </div>
   );
 };
