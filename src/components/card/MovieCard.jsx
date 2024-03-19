@@ -86,7 +86,17 @@ const MovieCard = ({ movieInfo, isAction }) => {
             onReady={onReady}
             className="plyer"
             origin={window.location.origin}
+            iframeClassName={"iframe_plyer"}
           />
+          {!isReady && (
+            <div className="movie_img">
+              <img
+                src={`https://image.tmdb.org/t/p/original${movieInfo.poster_path}`}
+                alt=""
+              />
+            </div>
+          )}
+
           {!isReady && (
             <div className="loading_animation">
               <Loading />
