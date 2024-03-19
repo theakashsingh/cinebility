@@ -9,11 +9,7 @@ const Home = () => {
   const [page, setPage] = useState(1);
   const [movieList, setMovieList] = useState([]);
   const homeRef = useRef(null);
-  const updatedMovieList = useSelector(state => state.movie.movies);
-  const isOnline = useSelector(state => state.movie.isOnline);
-  const sortingValue = useSelector(state => state.movie.sorting);
-  const genresValue = useSelector(state => state.movie.genres);
-  const languageValue = useSelector(state => state.movie.language);
+  const {movies:updatedMovieList,isOnline,sorting:sortingValue,genres:genresValue,language:languageValue} = useSelector(state => state.movie);
   const dispatch = useDispatch();
   useEffect(() => {
     if (!isOnline) return;
