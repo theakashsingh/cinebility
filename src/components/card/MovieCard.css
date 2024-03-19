@@ -3,19 +3,36 @@
   height: 33%;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .movie_image {
-  height: 100%;
+  height: 80%;
   width: 100%;
+  position: relative;
 }
 
+.movie_video {
+  height: 100%;
+}
+
+.movie_title {
+  padding: 8px 16px;
+  width: 100%;
+  position: absolute;
+  color: #ffffff;
+  background-color: rgba(100, 100, 100, 0.5);;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+}
 .movie_action {
+  height: 20%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
-  padding: 5px;
+  padding: 5px 15px;
 }
 
 .rating_container {
@@ -30,7 +47,11 @@
   cursor: pointer;
 }
 
-.star_rating{
-  cursor: pointer;
+.movie_favorites,
+.movie_wishlist span {
+  font-size: 12px;
 }
 
+.star_rating {
+  cursor: pointer;
+}

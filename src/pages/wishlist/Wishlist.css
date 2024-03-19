@@ -7,6 +7,8 @@
     flex-direction: column;
     gap: 20px;
     padding: 40px;
+  font-size: 18px;
+  font-weight: 500;
   }
   
   .home::-webkit-scrollbar {

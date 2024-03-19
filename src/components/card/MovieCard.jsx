@@ -7,7 +7,7 @@ import { FcLike } from "react-icons/fc";
 import { FaBookmark } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa6";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectFavorites,
   selectWishlist,
@@ -21,12 +21,14 @@ const MovieCard = ({ movieInfo, isAction }) => {
   const [isWishlist, setIsWishlist] = useState(false);
   const playerRef = useRef(null);
   const dispatch = useDispatch();
+  
+  const { wishlist, favorites } = useSelector(state => state.movie);
 
   useEffect(() => {
     const options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5, // When at least 50% of the player is visible
+      threshold: 0.5, 
     };
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -46,7 +48,7 @@ const MovieCard = ({ movieInfo, isAction }) => {
 
   useEffect(() => {
     if (isVisible && player) {
-      player.playVideo(); // Autoplay when visible
+      player.playVideo(); 
     }
   }, [isVisible, player]);
 
@@ -58,31 +60,31 @@ const MovieCard = ({ movieInfo, isAction }) => {
     height: "100%",
     width: "100%",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
-      autoplay: 1,
+      autoplay: 0,
     },
   };
 
   const handleFavorites = id => {
     setIsFavorites(!isFavorites);
-    // console.log({ id });
     dispatch(selectFavorites(id));
   };
   const handleWishList = id => {
     setIsWishlist(!isWishlist);
     dispatch(selectWishlist(id));
   };
+
   return (
     <div ref={playerRef} className="movie_card">
-      <div className="movie_image">
-        <div>
+      <div className="movie_image" style={{ height: isAction ? "" : "100%" }}>
+        <div className="movie_video">
           <YouTube
             videoId={movieInfo.videoKey}
             opts={option}
             onReady={onReady}
+            origin={window.location.origin}
           />
         </div>
-        <div></div>
+        <div className="movie_title">{movieInfo.title}</div>
       </div>
       {isAction && (
         <div className="movie_action">
@@ -91,14 +93,22 @@ const MovieCard = ({ movieInfo, isAction }) => {
             className="movie_favorites"
             onClick={() => handleFavorites(movieInfo.id)}
           >
-            {isFavorites ? <FcLike /> : <FcLikePlaceholder />}{" "}
+            {(favorites.some(item => item.id === movieInfo.id)) ? (
+              <FcLike />
+            ) : (
+              <FcLikePlaceholder />
+            )}{" "}
             <span>Favorites</span>
           </div>
           <div
             className="movie_wishlist"
             onClick={() => handleWishList(movieInfo.id)}
           >
-            {isWishlist ? <FaBookmark /> : <FaRegBookmark />}{" "}
+            {wishlist.some(item => item.id === movieInfo.id) ? (
+              <FaBookmark />
+            ) : (
+              <FaRegBookmark />
+            )}{" "}
             <span>Wishlist</span>
           </div>
         </div>

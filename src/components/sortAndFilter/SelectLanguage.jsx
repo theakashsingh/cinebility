@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { FaAngleDown } from "react-icons/fa";
 import { FaAngleUp } from "react-icons/fa";
 import useDetectOutsideClick from "../../utils/useDetectOutsideClick";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { setLanguageValue } from "../../redux/features/movieSlice";
 import { axiosInstance } from "../../utils/axiosInstance";
 
@@ -10,7 +10,6 @@ const SelectLanguage = () => {
   const [selectedLanguage, setSelectedLanguage] = useState([]);
   const [isLanguage, setIsLanguage] = useState(false);
   const [allLanguages, setAllLanguages] = useState([]);
-  const languageValue = useSelector(state => state.movie.language);
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
@@ -36,7 +35,6 @@ const SelectLanguage = () => {
     handleGetLanguages();
   }, []);
 
-  console.log({ languageValue });
 
   return (
     <div className="dropdown" ref={dropdownRef}>

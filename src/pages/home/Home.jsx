@@ -25,7 +25,6 @@ const Home = () => {
         language: languageValue,
       })
     );
-    console.log({ languageValue });
   }, [page, sortingValue, genresValue, languageValue]);
 
   const handleInfiniteScroll = () => {
@@ -35,7 +34,6 @@ const Home = () => {
       container.clientHeight
     ) {
       setPage(prevPage => prevPage + 1);
-      console.log({ page });
     }
   };
   useEffect(() => {
