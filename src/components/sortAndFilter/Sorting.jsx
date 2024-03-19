@@ -7,13 +7,12 @@ import { setSortingValue } from "../../redux/features/movieSlice";
 
 const Sorting = () => {
   const [isSorting, setIsSorting] = useState(false);
-const sortingValue = useSelector(state=>state.movie.sorting)
-const dispatch = useDispatch()
+  const sortingValue = useSelector(state => state.movie.sorting);
+  const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
   const handleSortingSelect = option => {
-    dispatch(setSortingValue(option))
-    setIsSorting(false);
+    dispatch(setSortingValue(option));
   };
 
   useDetectOutsideClick(dropdownRef, () => {
@@ -28,35 +27,39 @@ const dispatch = useDispatch()
         Sort by <span>{isSorting ? <FaAngleUp /> : <FaAngleDown />}</span>
       </button>
       {isSorting && (
-        <div className="dropdown-menu">
+        <div className="dropdown_menu">
           <div
-            className={`dropdown-option ${
-              sortingValue === "vote_count.asc" ? "selected" : ""
-            }`}
+            style={{
+              backgroundColor:
+                sortingValue === "vote_count.asc" ? "#D9D9D9" : "",
+            }}
             onClick={() => handleSortingSelect("vote_count.asc")}
           >
             Rating Asc
           </div>
           <div
-            className={`dropdown-option ${
-              sortingValue === "vote_count.desc" ? "selected" : ""
-            }`}
+            style={{
+              backgroundColor:
+                sortingValue === "vote_count.desc" ? "#D9D9D9" : "",
+            }}
             onClick={() => handleSortingSelect("vote_count.desc")}
           >
             Rating Desc
           </div>
           <div
-            className={`dropdown-option ${
-              sortingValue === "primary_release_date.asc" ? "selected" : ""
-            }`}
+            style={{
+              backgroundColor:
+                sortingValue === "primary_release_date.asc" ? "#D9D9D9" : "",
+            }}
             onClick={() => handleSortingSelect("primary_release_date.asc")}
           >
             Release Date Asc
           </div>
           <div
-            className={`dropdown-option ${
-              sortingValue === "primary_release_date.desc" ? "selected" : ""
-            }`}
+            style={{
+              backgroundColor:
+                sortingValue === "primary_release_date.desc" ? "#D9D9D9" : "",
+            }}
             onClick={() => handleSortingSelect("primary_release_date.desc")}
           >
             Release Date Desc

@@ -6,12 +6,13 @@ import { FcLikePlaceholder } from "react-icons/fc";
 import { FcLike } from "react-icons/fc";
 import { FaBookmark } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa6";
-import { FaRegStar } from "react-icons/fa";
+
 import { useDispatch } from "react-redux";
 import {
   selectFavorites,
   selectWishlist,
 } from "../../redux/features/movieSlice";
+import RatingCard from "./RatingCard";
 
 const MovieCard = ({ movieInfo, isAction }) => {
   const [player, setPlayer] = useState(null);
@@ -85,13 +86,7 @@ const MovieCard = ({ movieInfo, isAction }) => {
       </div>
       {isAction && (
         <div className="movie_action">
-          <div className="movie_rating">
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-            <FaRegStar />
-          </div>
+          <RatingCard movieId={movieInfo.id} />
           <div
             className="movie_favorites"
             onClick={() => handleFavorites(movieInfo.id)}

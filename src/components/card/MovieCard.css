@@ -18,7 +18,7 @@
   padding: 5px;
 }
 
-.movie_rating {
+.rating_container {
   display: flex;
   gap: 3px;
 }
@@ -29,3 +29,8 @@
   align-items: center;
   cursor: pointer;
 }
+
+.star_rating{
+  cursor: pointer;
+}
+

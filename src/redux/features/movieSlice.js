@@ -23,7 +23,8 @@ const initialState = {
   favorites: [],
   isOnline: navigator.onLine,
   sorting:"",
-  
+  language:"",
+  genres:""
 };
 
 const movieSlice = createSlice({
@@ -79,10 +80,18 @@ const movieSlice = createSlice({
     setSortingValue : (state,action)=>{
         state.sorting = action.payload
         state.movies.list = []
+    },
+    setLanguageValue:(state,action)=>{
+      state.language = action.payload
+      state.movies.list = []
+    },
+    setGenresValue:(state,action)=>{
+      state.genres = action.payload
+      state.movies.list = []
     }
   },
 });
 
-export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue} =
+export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue, setLanguageValue,setGenresValue} =
   movieSlice.actions;
 export default movieSlice.reducer;

@@ -2,12 +2,22 @@ import { axiosInstance } from "../../utils/axiosInstance";
 
 const movieServices = {
   getMovieList: async credentials => {
-    const { pageNo, sorting } = credentials;
-    let url;
+    const { pageNo, sorting, genres, language } = credentials;
+    let url = "discover/movie?language=en-US&page=" + pageNo;
+
+    if (genres) {
+      url += `&with_genres=${genres}`;
+    }
+
     if (sorting) {
-      url = `discover/movie?language=en-US&page=${pageNo}&sort_by=${sorting}`;
-      console.log({ url });
-    } else {
+      url += `&sort_by=${sorting}`;
+    }
+
+    if (language) {
+      url += `&with_original_language=${language}`;
+    }
+
+    if (!genres && !sorting && !language) {
       url = `movie/popular?language=en-US&page=${pageNo}`;
     }
     const response = await axiosInstance.get(url);
