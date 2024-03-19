@@ -6,6 +6,7 @@ import { FcLikePlaceholder } from "react-icons/fc";
 import { FcLike } from "react-icons/fc";
 import { FaBookmark } from "react-icons/fa6";
 import { FaRegBookmark } from "react-icons/fa6";
+import Loading from "../LoadingAnimation/Loading";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -19,16 +20,17 @@ const MovieCard = ({ movieInfo, isAction }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isFavorites, setIsFavorites] = useState(false);
   const [isWishlist, setIsWishlist] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const playerRef = useRef(null);
   const dispatch = useDispatch();
-  
+
   const { wishlist, favorites } = useSelector(state => state.movie);
 
   useEffect(() => {
     const options = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5, 
+      threshold: 0.5,
     };
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -48,12 +50,13 @@ const MovieCard = ({ movieInfo, isAction }) => {
 
   useEffect(() => {
     if (isVisible && player) {
-      player.playVideo(); 
+      player.playVideo();
     }
   }, [isVisible, player]);
 
   const onReady = event => {
     setPlayer(event.target);
+    setIsReady(true);
   };
 
   const option = {
@@ -81,10 +84,13 @@ const MovieCard = ({ movieInfo, isAction }) => {
             videoId={movieInfo.videoKey}
             opts={option}
             onReady={onReady}
+            className="plyer"
             origin={window.location.origin}
           />
+          {!isReady && <Loading>loading</Loading>}
         </div>
-        <div className="movie_title">{movieInfo.title}</div>
+        {!isReady && <div className="movie_title"><span>{movieInfo.title}</span><span>{movieInfo.release_date}</span></div>}
+        
       </div>
       {isAction && (
         <div className="movie_action">
@@ -93,7 +99,7 @@ const MovieCard = ({ movieInfo, isAction }) => {
             className="movie_favorites"
             onClick={() => handleFavorites(movieInfo.id)}
           >
-            {(favorites.some(item => item.id === movieInfo.id)) ? (
+            {favorites.some(item => item.id === movieInfo.id) ? (
               <FcLike />
             ) : (
               <FcLikePlaceholder />

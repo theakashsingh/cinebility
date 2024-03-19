@@ -22,11 +22,15 @@
   width: 100%;
   position: absolute;
   color: #ffffff;
-  background-color: rgba(100, 100, 100, 0.5);;
-  bottom: 2px;
+  background-color: rgba(100, 100, 100, 0.5);
   left: 0;
   right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
 .movie_action {
   height: 20%;
   display: flex;
@@ -55,4 +59,8 @@
 
 .star_rating {
   cursor: pointer;
+}
+
+.plyer {
+  height: 100%;
 }
