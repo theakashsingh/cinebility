@@ -17,6 +17,11 @@
   height: 100%;
 }
 
+.loading_animation {
+  position: absolute;
+  top: 35%;
+  left: 45%;
+}
 .movie_title {
   padding: 8px 16px;
   width: 100%;
@@ -63,4 +68,5 @@
 
 .plyer {
   height: 100%;
+  background-color: #ffffff;
 }

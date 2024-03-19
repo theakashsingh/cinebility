@@ -87,10 +87,18 @@ const MovieCard = ({ movieInfo, isAction }) => {
             className="plyer"
             origin={window.location.origin}
           />
-          {!isReady && <Loading>loading</Loading>}
+          {!isReady && (
+            <div className="loading_animation">
+              <Loading />
+            </div>
+          )}
         </div>
-        {!isReady && <div className="movie_title"><span>{movieInfo.title}</span><span>{movieInfo.release_date}</span></div>}
-        
+        {!isReady && (
+          <div className="movie_title">
+            <span>{movieInfo.title}</span>
+            <span>{movieInfo.release_date}</span>
+          </div>
+        )}
       </div>
       {isAction && (
         <div className="movie_action">
