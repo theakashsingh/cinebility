@@ -41,8 +41,7 @@ const Genres = () => {
   };
 
   return (
-    <div>
-      Genres
+    <div className="genres">
       {allGenres.map(genres => (
         <span
           key={genres.id}

@@ -3,4 +3,64 @@
   height: 100%;
   background-color: #ffffff;
   padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.sort_and_filter h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #808080;
+  margin-bottom: 10px;
+}
+
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.genres span {
+  width: max-content;
+  padding: 4px 8px;
+  border-radius: 50px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.dropdown {
+  width: 90%;
+}
+.dropdown_toggle {
+  width: 100%;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.dropdown_toggle span {
+  display: flex;
+}
+
+.dropdown_menu {
+  max-height: 200px;
+  overflow: auto;
+  border: 1px solid black;
+}
+.dropdown_menu div {
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid black;
 }

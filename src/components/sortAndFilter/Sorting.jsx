@@ -21,7 +21,7 @@ const Sorting = () => {
   return (
     <div className="dropdown" ref={dropdownRef}>
       <button
-        className="dropdown-toggle"
+        className="dropdown_toggle"
         onClick={() => setIsSorting(!isSorting)}
       >
         Sort by <span>{isSorting ? <FaAngleUp /> : <FaAngleDown />}</span>
