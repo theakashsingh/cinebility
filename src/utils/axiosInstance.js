@@ -7,6 +7,6 @@ export const axiosInstance = axios.create({
   headers: {
     accept: 'application/json',
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${import.meta.env.REACT_APP_TOKEN}` 
+    Authorization: `Bearer ${import.meta.env.VITE_APP_TOKEN}` 
   }
 });
