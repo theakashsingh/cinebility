@@ -52,9 +52,11 @@ const movieSlice = createSlice({
       const movies = JSON.parse(localStorage.getItem("movies"));
       console.log(movies.some(item => item.id === action.payload));
       if (state.favorites.some(item => item.id === action.payload)) {
-        state.favorites = state.favorites.filter(
+        const filterFavorites =  state.favorites.filter(
           item => item.id !== action.payload
         );
+        state.favorites = filterFavorites
+        localStorage.setItem("favorites",JSON.stringify(filterFavorites))
       } else {
         console.log({ movies }, action.payload);
         const selectedFavorites = movies.filter(
@@ -69,9 +71,11 @@ const movieSlice = createSlice({
       const movies = JSON.parse(localStorage.getItem("movies"));
 
       if (state.wishlist.some(item => item.id === action.payload)) {
-        state.wishlist = state.wishlist.filter(
+        const filterWishlist = state.wishlist.filter(
           item => item.id !== action.payload
         );
+        state.wishlist = filterWishlist
+        localStorage.setItem("wishlist",JSON.stringify(filterWishlist))
       } else {
         const selectedWishlist = movies.filter(
           item => item.id === action.payload
@@ -80,6 +84,12 @@ const movieSlice = createSlice({
         localStorage.setItem("wishlist",JSON.stringify(finalValue))
         state.wishlist = finalValue;
       }
+    },
+    setLocalWishlist:(state,action)=>{
+        state.wishlist = action.payload
+    },
+    setLocalFavorites:(state,action)=>{
+      state.favorites = action.payload
     },
     setSortingValue : (state,action)=>{
         state.sorting = action.payload
@@ -96,6 +106,6 @@ const movieSlice = createSlice({
   },
 });
 
-export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue, setLanguageValue,setGenresValue} =
+export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue, setLanguageValue,setGenresValue,setLocalWishlist,setLocalFavorites} =
   movieSlice.actions;
 export default movieSlice.reducer;

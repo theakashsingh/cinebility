@@ -13,7 +13,7 @@ const Wishlist = () => {
 
   return (
     <div className="wishlist">
-      <h3>Favorites</h3>
+      <h3>Wishlist</h3>
       {
         wishlist && wishlist.map((movieInfo, id) => (
           <MovieCard
