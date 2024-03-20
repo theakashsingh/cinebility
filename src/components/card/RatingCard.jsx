@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { axiosInstance } from "../../utils/axiosInstance";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RatingCard({ movieId }) {
   const [rating, setRating] = useState(0);
+  const [isSuccess,setIsSuccess] = useState(false)
 
   const handleStarClick = async value => {
     setRating(value);
     try {
       const response = await axiosInstance.post(`movie/${movieId}/rating`, {
-        body: JSON.stringify({
-          value: value,
-        }),
+        value: value,
       });
-      console.log({ response });
+
+      if (response?.data?.success) {
+        setIsSuccess(true)
+      }
     } catch (error) {
       console.error("Error submitting rating:", error);
     }
   };
+
+ useEffect(() => {
+   if (isSuccess) {
+    toast.success("Your rating has been saved");
+   }
+ }, [isSuccess])
+ 
 
   return (
     <div className="rating_container">
@@ -31,6 +42,8 @@ function RatingCard({ movieId }) {
           {value <= rating ? <FaStar /> : <FaRegStar />}
         </span>
       ))}
+      {isSuccess && <ToastContainer />}
+      
     </div>
   );
 }

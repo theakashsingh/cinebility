@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
-import { checkOnlineMode, setLocalFavorites, setLocalWishlist } from "./redux/features/movieSlice";
+import {
+  checkOnlineMode,
+  setLocalFavorites,
+  setLocalWishlist,
+} from "./redux/features/movieSlice";
 
 const router = createBrowserRouter([
   {
@@ -32,14 +36,13 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [initialToastShown, setInitialToastShown] = useState(false);
   const isOnline = useSelector(state => state.movie.isOnline);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleOnlineStatusChange = () => {
-        dispatch(checkOnlineMode(navigator.onLine))
+      dispatch(checkOnlineMode(navigator.onLine));
     };
 
     window.addEventListener("online", handleOnlineStatusChange);
@@ -55,20 +58,19 @@ function App() {
     if (!initialToastShown && isOnline) {
       setInitialToastShown(true);
     } else if (isOnline) {
-      toast("You are now in online mode.!");
-    }else{
-      toast("You are now in offline mode.");
+      toast.info("You are now in online mode.!");
+    } else {
+      toast.info("You are now in offline mode.");
     }
-  }, [isOnline])
+  }, [isOnline]);
 
   useEffect(() => {
-    const wishlistData = JSON.parse(localStorage.getItem("wishlist"))
-    const favoritesData = JSON.parse(localStorage.getItem("favorites"))
-    dispatch(setLocalFavorites(favoritesData))
-    dispatch(setLocalWishlist(wishlistData))
-  }, [])
-  
-  
+    const wishlistData = JSON.parse(localStorage.getItem("wishlist"));
+    const favoritesData = JSON.parse(localStorage.getItem("favorites"));
+    dispatch(setLocalFavorites(favoritesData));
+    dispatch(setLocalWishlist(wishlistData));
+  }, []);
+
   return (
     <div className="app">
       <RouterProvider router={router} />
