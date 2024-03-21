@@ -50,8 +50,7 @@ const movieSlice = createSlice({
     },
     selectFavorites: (state, action) => {
       const movies = JSON.parse(localStorage.getItem("movies"));
-      console.log(movies.some(item => item.id === action.payload));
-      if (state.favorites.some(item => item.id === action.payload)) {
+      if (state.favorites?.some(item => item.id === action.payload)) {
         const filterFavorites =  state.favorites.filter(
           item => item.id !== action.payload
         );
@@ -70,7 +69,7 @@ const movieSlice = createSlice({
     selectWishlist: (state, action) => {
       const movies = JSON.parse(localStorage.getItem("movies"));
 
-      if (state.wishlist.some(item => item.id === action.payload)) {
+      if (state.wishlist?.some(item => item.id === action.payload)) {
         const filterWishlist = state.wishlist.filter(
           item => item.id !== action.payload
         );
@@ -80,7 +79,8 @@ const movieSlice = createSlice({
         const selectedWishlist = movies.filter(
           item => item.id === action.payload
         );
-        const finalValue = [...state.wishlist, selectedWishlist[0]]
+        console.log(state);
+        const finalValue =  [...state.wishlist, selectedWishlist[0]]
         localStorage.setItem("wishlist",JSON.stringify(finalValue))
         state.wishlist = finalValue;
       }
