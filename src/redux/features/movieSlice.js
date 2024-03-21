@@ -22,9 +22,9 @@ const initialState = {
   wishlist: [],
   favorites: [],
   isOnline: navigator.onLine,
-  sorting:"",
-  language:"",
-  genres:""
+  sorting: "",
+  language: "",
+  genres: "",
 };
 
 const movieSlice = createSlice({
@@ -51,61 +51,71 @@ const movieSlice = createSlice({
     selectFavorites: (state, action) => {
       const movies = JSON.parse(localStorage.getItem("movies"));
       if (state.favorites?.some(item => item.id === action.payload)) {
-        const filterFavorites =  state.favorites.filter(
+        const filterFavorites = state.favorites.filter(
           item => item.id !== action.payload
         );
-        state.favorites = filterFavorites
-        localStorage.setItem("favorites",JSON.stringify(filterFavorites))
+        state.favorites = filterFavorites;
+        localStorage.setItem("favorites", JSON.stringify(filterFavorites));
       } else {
         console.log({ movies }, action.payload);
         const selectedFavorites = movies.filter(
           item => item.id === action.payload
         );
-        const finalValue = [...state.favorites, selectedFavorites[0]]
-        localStorage.setItem("favorites",JSON.stringify(finalValue))
+        const finalValue = [...state.favorites, selectedFavorites[0]];
+        localStorage.setItem("favorites", JSON.stringify(finalValue));
         state.favorites = finalValue;
       }
     },
     selectWishlist: (state, action) => {
-      const movies = JSON.parse(localStorage.getItem("movies"));
+      const moviesList = JSON.parse(localStorage.getItem("movies"));
 
-      if (state.wishlist?.some(item => item.id === action.payload)) {
-        const filterWishlist = state.wishlist.filter(
-          item => item.id !== action.payload
-        );
-        state.wishlist = filterWishlist
-        localStorage.setItem("wishlist",JSON.stringify(filterWishlist))
-      } else {
-        const selectedWishlist = movies.filter(
-          item => item.id === action.payload
-        );
-        console.log(state);
-        const finalValue =  [...state.wishlist, selectedWishlist[0]]
-        localStorage.setItem("wishlist",JSON.stringify(finalValue))
-        state.wishlist = finalValue;
+      if (moviesList) {
+        if (state.wishlist?.some(item => item.id === action.payload)) {
+          const filterWishlist = state.wishlist.filter(
+            item => item.id !== action.payload
+          );
+          state.wishlist = filterWishlist;
+          localStorage.setItem("wishlist", JSON.stringify(filterWishlist));
+        } else {
+          const selectedWishlist = moviesList?.filter(
+             item => item.id === action.payload
+          );
+          const finalValue = [...state.wishlist, selectedWishlist[0]] 
+          localStorage.setItem("wishlist", JSON.stringify(finalValue));
+          state.wishlist = finalValue;
+        }
       }
+     
     },
-    setLocalWishlist:(state,action)=>{
-        state.wishlist = action.payload
+    setLocalWishlist: (state, action) => {
+      state.wishlist = action.payload;
     },
-    setLocalFavorites:(state,action)=>{
-      state.favorites = action.payload
+    setLocalFavorites: (state, action) => {
+      state.favorites = action.payload;
     },
-    setSortingValue : (state,action)=>{
-        state.sorting = action.payload
-        state.movies.list = []
+    setSortingValue: (state, action) => {
+      state.sorting = action.payload;
+      state.movies.list = [];
     },
-    setLanguageValue:(state,action)=>{
-      state.language = action.payload
-      state.movies.list = []
+    setLanguageValue: (state, action) => {
+      state.language = action.payload;
+      state.movies.list = [];
     },
-    setGenresValue:(state,action)=>{
-      state.genres = action.payload
-      state.movies.list = []
-    }
+    setGenresValue: (state, action) => {
+      state.genres = action.payload;
+      state.movies.list = [];
+    },
   },
 });
 
-export const { checkOnlineMode, selectFavorites, selectWishlist , setSortingValue, setLanguageValue,setGenresValue,setLocalWishlist,setLocalFavorites} =
-  movieSlice.actions;
+export const {
+  checkOnlineMode,
+  selectFavorites,
+  selectWishlist,
+  setSortingValue,
+  setLanguageValue,
+  setGenresValue,
+  setLocalWishlist,
+  setLocalFavorites,
+} = movieSlice.actions;
 export default movieSlice.reducer;

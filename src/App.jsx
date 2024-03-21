@@ -67,8 +67,14 @@ function App() {
   useEffect(() => {
     const wishlistData = JSON.parse(localStorage.getItem("wishlist"));
     const favoritesData = JSON.parse(localStorage.getItem("favorites"));
-    dispatch(setLocalFavorites(favoritesData));
-    dispatch(setLocalWishlist(wishlistData));
+    if (wishlistData) {
+      
+      dispatch(setLocalWishlist(wishlistData));
+    }
+    if (favoritesData) {
+      
+      dispatch(setLocalFavorites(favoritesData));
+    }
   }, []);
 
   return (
