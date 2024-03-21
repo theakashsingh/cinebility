@@ -117,7 +117,7 @@ const MovieCard = ({ movieInfo, isAction }) => {
             className="movie_favorites"
             onClick={() => handleFavorites(movieInfo.id)}
           >
-            {favorites.some(item => item.id === movieInfo.id) ? (
+            {favorites?.some(item => item.id === movieInfo.id) ? (
               <FcLike />
             ) : (
               <FcLikePlaceholder />
@@ -128,7 +128,7 @@ const MovieCard = ({ movieInfo, isAction }) => {
             className="movie_wishlist"
             onClick={() => handleWishList(movieInfo.id)}
           >
-            {wishlist.some(item => item.id === movieInfo.id) ? (
+            {wishlist?.some(item => item.id === movieInfo.id) ? (
               <FaBookmark />
             ) : (
               <FaRegBookmark />
