@@ -1,19 +1,25 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import SortAndFilter from "../../components/sortAndFilter/SortAndFilter";
 import useDetectOutsideClick from "../../utils/useDetectOutsideClick";
+import { useDispatch, useSelector } from "react-redux";
+import { setSortAndFilter } from "../../redux/features/movieSlice";
 
 const Header = () => {
-  const [isSortAndFilter, setIsSortAndFilter] = useState(false);
+  // const [isSortAndFilter, setIsSortAndFilter] = useState(false);
+  const isSortAndFilter = useSelector( state =>state.movie.isSortAndFilter)
+const dispatch = useDispatch()
   const sortAndFilterRef = useRef(null);
 
   const handleSortAndFilter = () => {
-    setIsSortAndFilter(!isSortAndFilter);
+    // setIsSortAndFilter(!isSortAndFilter);
+    dispatch(setSortAndFilter(!isSortAndFilter))
   };
 
   const handleClickOutside = () => {
-    setIsSortAndFilter(false);
+    // setIsSortAndFilter(false);
+    dispatch(setSortAndFilter(false))
   };
 
   useDetectOutsideClick(sortAndFilterRef, handleClickOutside);

@@ -46,3 +46,10 @@
 .sorting_and_filter_section.open {
   translate: 0%;
 }
+
+.search_button button {
+  width: 90%;
+  padding: 8px 16px;
+  border-radius: 50px;
+  cursor: pointer;
+}

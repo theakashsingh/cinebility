@@ -25,6 +25,7 @@ const initialState = {
   sorting: "",
   language: "",
   genres: "",
+  isSortAndFilter:false
 };
 
 const movieSlice = createSlice({
@@ -105,6 +106,9 @@ const movieSlice = createSlice({
       state.genres = action.payload;
       state.movies.list = [];
     },
+    setSortAndFilter:(state,action)=>{
+       state.isSortAndFilter = action.payload
+    }
   },
 });
 
@@ -117,5 +121,6 @@ export const {
   setGenresValue,
   setLocalWishlist,
   setLocalFavorites,
+  setSortAndFilter
 } = movieSlice.actions;
 export default movieSlice.reducer;
