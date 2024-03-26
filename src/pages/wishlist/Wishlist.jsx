@@ -15,7 +15,7 @@ const Wishlist = () => {
   return (
     <div className="wishlist">
       <h3>Wishlist</h3>
-      {wishlist.length > 0 &&
+      {wishlist &&
         wishlist.map((movieInfo, id) => (
           <MovieCard
             key={`${movieInfo.videoKey}_${id}`}

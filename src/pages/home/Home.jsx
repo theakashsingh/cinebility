@@ -87,7 +87,7 @@ const Home = () => {
     sorting: sortingValue,
     genres: genresValue,
     language: languageValue,
-  } = useSelector((state) => state.movie);
+  } = useSelector(state => state.movie);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -108,7 +108,7 @@ const Home = () => {
       container.scrollHeight - container.scrollTop <=
       container.clientHeight
     ) {
-      setPage((prevPage) => prevPage + 1);
+      setPage(prevPage => prevPage + 1);
     }
   };
   useEffect(() => {
@@ -152,4 +152,3 @@ const Home = () => {
 };
 
 export default Home;
-

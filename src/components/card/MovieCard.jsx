@@ -200,12 +200,11 @@ const MovieCard = ({
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting && entry.boundingClientRect.y < 0) {
-          const nextIndex = index + 1;
-          setCurrentIndex(nextIndex);
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          setCurrentIndex(index);
         }
       },
-      { threshold: 0 }
+      { threshold: 0.5 }
     );
   
     if (playerRef.current) {
@@ -213,11 +212,12 @@ const MovieCard = ({
     }
   
     return () => {
-      if (playerRef.current) {
+      if (observer && playerRef.current) {
         observer.unobserve(playerRef.current);
       }
     };
   }, [index, setCurrentIndex]);
+  
   
 
   useEffect(() => {
