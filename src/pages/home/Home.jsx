@@ -4,6 +4,7 @@ import MovieCard from "../../components/card/MovieCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovies } from "../../redux/features/movieSlice";
 import Loading from "../../components/LoadingAnimation/Loading";
+import SortAndFilter from "../../components/sortAndFilter/SortAndFilter";
 
 const Home = () => {
   const [page, setPage] = useState(1);
@@ -59,7 +60,8 @@ const Home = () => {
 
   return (
     <div className="home" ref={homeRef}>
-      {movieList &&
+      <SortAndFilter/>
+      {/* {movieList &&
         movieList?.map((movieInfo, index) => (
           <MovieCard
             key={`${movieInfo.videoKey}_${index}`}
@@ -75,7 +77,7 @@ const Home = () => {
         <div className="infinite_loading">
           <Loading />
         </div>
-      )}
+      )} */}
     </div>
   );
 };
