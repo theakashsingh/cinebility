@@ -59,25 +59,26 @@ const Home = () => {
   }, [updatedMovieList.list]);
 
   return (
-    <div className="home" ref={homeRef}>
-      <SortAndFilter/>
-      {/* {movieList &&
-        movieList?.map((movieInfo, index) => (
-          <MovieCard
-            key={`${movieInfo.videoKey}_${index}`}
-            movieInfo={movieInfo}
-            isAction={true}
-            index={index}
-            currentIndex={currentIndex}
-            setCurrentIndex={setCurrentIndex}
-          />
-        ))}
-
+    <div className="container mx-auto px-4 py-6" ref={homeRef}>
+      <SortAndFilter />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+        {movieList &&
+          movieList?.map((movieInfo, index) => (
+            <MovieCard
+              key={`${movieInfo.videoKey}_${index}`}
+              movieInfo={movieInfo}
+              isAction={true}
+              index={index}
+              currentIndex={currentIndex}
+              setCurrentIndex={setCurrentIndex}
+            />
+          ))}
+      </div>
       {updatedMovieList.loading && (
         <div className="infinite_loading">
           <Loading />
         </div>
-      )} */}
+      )}
     </div>
   );
 };

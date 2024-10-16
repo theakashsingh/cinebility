@@ -78,7 +78,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className="bg-gray-900 min-h-screen text-gray-100">
       <RouterProvider router={router} />
       <ToastContainer />
     </div>

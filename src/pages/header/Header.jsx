@@ -47,22 +47,22 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
 import { useRef } from "react";
-import SortAndFilter from "../../components/sortAndFilter/SortAndFilter";
+// import SortAndFilter from "../../components/sortAndFilter/SortAndFilter";
 import useDetectOutsideClick from "../../utils/useDetectOutsideClick";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSortAndFilter } from "../../redux/features/movieSlice";
 import { Heart, Home, List } from "lucide-react";
 
 const Header = () => {
   // const [isSortAndFilter, setIsSortAndFilter] = useState(false);
-  const isSortAndFilter = useSelector( state =>state.movie.isSortAndFilter)
+  // const isSortAndFilter = useSelector( state =>state.movie.isSortAndFilter)
 const dispatch = useDispatch()
   const sortAndFilterRef = useRef(null);
 
-  const handleSortAndFilter = () => {
-    // setIsSortAndFilter(!isSortAndFilter);
-    dispatch(setSortAndFilter(!isSortAndFilter))
-  };
+  // const handleSortAndFilter = () => {
+  //   // setIsSortAndFilter(!isSortAndFilter);
+  //   dispatch(setSortAndFilter(!isSortAndFilter))
+  // };
 
   const handleClickOutside = () => {
     // setIsSortAndFilter(false);
