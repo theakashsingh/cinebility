@@ -72,36 +72,33 @@
 
 // export default Sorting;
 
-import { useRef, useState } from "react";
-import useDetectOutsideClick from "../../utils/useDetectOutsideClick";
-import { useDispatch, useSelector } from "react-redux";
-import { setSortingValue } from "../../redux/features/movieSlice";
+import { useDispatch } from "react-redux";
+import { getMovies } from "../../redux/features/movieSlice";
 
 const Sorting = () => {
-  // const sortingValue = useSelector(state => state.movie.sorting);
   const dispatch = useDispatch();
-  const handleSortingSelect = option => {
-    dispatch(setSortingValue(option));
+  const handleSortingSelect = e => {
+    const option = e.target.value;
+    console.log(option);
+    dispatch(
+      getMovies({
+        pageNo: 1,
+        sorting: option,
+      })
+    );
   };
 
   return (
-    <select className="p-2 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white">
+    <select
+      className="p-2 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
+      onChange={handleSortingSelect}
+    >
       <>
         <option>Sort by</option>
-        <option onClick={() => handleSortingSelect("vote_count.asc")}>
-          Rating Asc
-        </option>
-        <option onClick={() => handleSortingSelect("vote_count.desc")}>
-          Rating Desc
-        </option>
-        <option onClick={() => handleSortingSelect("primary_release_date.asc")}>
-          Release Date Asc
-        </option>
-        <option
-          onClick={() => handleSortingSelect("primary_release_date.desc")}
-        >
-          Release Date Desc
-        </option>
+        <option value="vote_count.asc">Rating Asc</option>
+        <option value="vote_count.desc">Rating Desc</option>
+        <option value="primary_release_date.asc">Release Date Asc</option>
+        <option value="primary_release_date.desc">Release Date Desc</option>
       </>
     </select>
   );
