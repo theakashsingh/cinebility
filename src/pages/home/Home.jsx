@@ -9,7 +9,7 @@ import SortAndFilter from "../../components/sortAndFilter/SortAndFilter";
 const Home = () => {
   const [page, setPage] = useState(1);
   const [movieList, setMovieList] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(-1); // Initialize currentIndex state
+  const [currentIndex, setCurrentIndex] = useState(-1); 
   const homeRef = useRef(null);
   const {
     movies: updatedMovieList,

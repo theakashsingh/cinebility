@@ -23,19 +23,6 @@ const movieServices = {
     const response = await axiosInstance.get(url);
     console.log(response.data);
     return response.data
-
-    // const moviesWithVideos = await Promise.all(
-    //   response.data.results.map(async currResult => {
-    //     const videoResponse = await axiosInstance.get(
-    //       `/movie/${currResult.id}/videos`
-    //     );
-
-    //     const videoKey = videoResponse.data.results[0]?.key;
-    //     return { ...currResult, videoKey };
-    //   })
-    // );
-
-    // return moviesWithVideos;
   },
 };
 
