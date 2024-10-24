@@ -8,10 +8,10 @@ const SelectLanguage = () => {
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
-  const handleLanguageSelect = option => {
-    dispatch(setLanguageValue(option));
+  const handleLanguageSelect = e => {
+    const lang = e.target.value
+    dispatch(setLanguageValue(lang));
   };
-
 
   const handleGetLanguages = async () => {
     try {
@@ -28,12 +28,15 @@ const SelectLanguage = () => {
   return (
     <div className="dropdown" ref={dropdownRef}>
       <h3 className="font-semibold mb-2 text-gray-200">Language</h3>
-      <select className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white" onChange={handleLanguageSelect}>
+      <select
+        className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
+        onChange={handleLanguageSelect}
+      >
+        <option>All Languages</option>
         {allLanguages.map(lang => (
-          <>
-            <option>All Languages</option>
-            <option value={lang.iso_639_1} key={lang.iso_639_1}>lang.english_name</option>
-          </>
+          <option value={lang.iso_639_1} key={lang.iso_639_1}>
+            {lang.english_name}
+          </option>
         ))}
       </select>
     </div>

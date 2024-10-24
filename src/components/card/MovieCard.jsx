@@ -20,14 +20,14 @@ const MovieCard = ({
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef(null);
   const dispatch = useDispatch();
-  
-  const convertRatingInFive = (rating) =>{
-    if (rating < 1 || rating > 10) {
-      throw new Error("Rating should be between 1 and 10");
-    }
-    return (rating / 2).toFixed(1);
-  }
-  
+
+  // const convertRatingInFive = rating => {
+  //   if (rating < 1 || rating > 10) {
+  //     throw new Error("Rating should be between 1 and 10");
+  //   }
+  //   return (rating / 2).toFixed(1);
+  // };
+
   const onReady = event => {
     setPlayer(event.target);
     setIsReady(true);
@@ -78,10 +78,12 @@ const MovieCard = ({
     >
       <div className="relative">
         <div className="movie_video">
-        <div className="absolute top-0 right-0 bg-yellow-500 text-gray-900 px-2 py-1 m-2 rounded-full flex items-center">
-        <Star className="w-4 h-4 mr-1" />
-        <span className="font-bold">{convertRatingInFive(movieInfo.vote_average)}</span>
-      </div>
+          <div className="absolute top-0 right-0 bg-yellow-500 text-gray-900 px-2 py-1 m-2 rounded-full flex items-center">
+            <Star className="w-4 h-4 mr-1" />
+            <span className="font-bold">
+              {movieInfo.vote_average}
+            </span>
+          </div>
           <YouTube
             videoId={movieInfo.videoKey}
             onReady={onReady}
@@ -112,17 +114,25 @@ const MovieCard = ({
         </div>
       </div>
       {isAction && (
-         <div className="p-4">
-         <h3 className="font-bold text-lg mb-2 text-gray-100 truncate">{movieInfo.title}</h3>
-         <div className="flex space-x-2">
-           <button className="bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition duration-300 flex items-center justify-center flex-1"  onClick={() => handleFavorites(movieInfo.id)}>
-             <Heart className="w-4 h-4 mr-2" /> Favorite
-           </button>
-           <button className="bg-purple-600 text-white px-3 py-2 rounded-full hover:bg-purple-700 transition duration-300 flex items-center justify-center flex-1" onClick={() => handleWishList(movieInfo.id)}>
-             <BookmarkPlus className="w-4 h-4 mr-2" /> Wishlist
-           </button>
-         </div>
-       </div>
+        <div className="p-4">
+          <h3 className="font-bold text-lg mb-2 text-gray-100 truncate">
+            {movieInfo.title}
+          </h3>
+          <div className="flex space-x-2">
+            <button
+              className="bg-blue-600 text-white px-3 py-2 rounded-full hover:bg-blue-700 transition duration-300 flex items-center justify-center flex-1"
+              onClick={() => handleFavorites(movieInfo.id)}
+            >
+              <Heart className="w-4 h-4 mr-2" /> Favorite
+            </button>
+            <button
+              className="bg-purple-600 text-white px-3 py-2 rounded-full hover:bg-purple-700 transition duration-300 flex items-center justify-center flex-1"
+              onClick={() => handleWishList(movieInfo.id)}
+            >
+              <BookmarkPlus className="w-4 h-4 mr-2" /> Wishlist
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );
