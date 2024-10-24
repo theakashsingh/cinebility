@@ -11,7 +11,7 @@ const Genres = () => {
 
   const handleGetGenres = async () => {
     try {
-      const response = await axiosInstance(`genre/movie/list`);
+      const response = await axiosInstance(`getGenres`);
       setAllGenres(response.data.genres);
     } catch (error) {
       console.log(error);

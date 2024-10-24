@@ -50,33 +50,30 @@
 
 // export default SortAndFilter;
 
-import { useDispatch, useSelector } from "react-redux";
 import Genres from "./Genres";
-import SelectLanguage from "./SelectLanguage";
 import "./SortAndFilter.css";
 import Sorting from "./Sorting";
-import { getMovies, setSortAndFilter } from "../../redux/features/movieSlice";
-import { useNavigate } from "react-router-dom";
+// import { getMovies, setSortAndFilter } from "../../redux/features/movieSlice";
+// import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ChevronDown, Filter, Search } from "lucide-react";
 
 const SortAndFilter = () => {
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  const { sorting, language, genres } = useSelector(state => state.movie);
-  const dispatch = useDispatch();
-  const navigate = useNavigate()
-  const sortAndFilter = () => {
-    dispatch(
-      getMovies({
-        pageNo: 1,
-        sorting: sorting,
-        genres: genres,
-        language: language,
-      })
-    );
-    dispatch(setSortAndFilter(false));
-    navigate("/")
-  };
+  // const { sorting, language, genres } = useSelector(state => state.movie);
+  // const dispatch = useDispatch();
+  // const navigate = useNavigate()
+  // const sortAndFilter = () => {
+  //   dispatch(
+  //     getMovies({
+  //       pageNo: 1,
+  //       sorting: sorting,
+  //       genres: genres,
+  //       language: language,
+  //     })
+  //   );
+  //   dispatch(setSortAndFilter(false));
+  // };
   return (
     <div className="bg-gray-800 rounded-lg shadow-md mb-8 overflow-hidden border border-gray-700">
     <div className="p-4 sm:p-6">
@@ -110,12 +107,7 @@ const SortAndFilter = () => {
           <div>
             <h3 className="font-semibold mb-2 text-gray-200">Genre</h3>
             <div className="space-y-2">
-              {['Action', 'Comedy', 'Drama', 'Sci-Fi'].map((genre) => (
-                <label key={genre} className="flex items-center space-x-2 text-gray-300">
-                  <input type="checkbox" className="form-checkbox text-blue-500 bg-gray-600 border-gray-500" />
-                  <span>{genre}</span>
-                </label>
-              ))}
+              <Genres/>
             </div>
           </div>
           <div>

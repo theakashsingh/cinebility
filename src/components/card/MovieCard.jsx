@@ -20,8 +20,7 @@ const MovieCard = ({
   const [isReady, setIsReady] = useState(false);
   const playerRef = useRef(null);
   const dispatch = useDispatch();
-  // const { favorites, wishlist } = useSelector(state => state.movie);
-
+  
   const convertRatingInFive = (rating) =>{
     if (rating < 1 || rating > 10) {
       throw new Error("Rating should be between 1 and 10");

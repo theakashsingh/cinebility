@@ -79,7 +79,6 @@ const Sorting = () => {
   const dispatch = useDispatch();
   const handleSortingSelect = e => {
     const option = e.target.value;
-    console.log(option);
     dispatch(
       getMovies({
         pageNo: 1,
