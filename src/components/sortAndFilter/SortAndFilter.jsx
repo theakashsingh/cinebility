@@ -3,7 +3,7 @@ import "./SortAndFilter.css";
 import Sorting from "./Sorting";
 import { getMovies } from "../../redux/features/movieSlice";
 import { useState } from "react";
-import { ChevronDown, Filter, Search } from "lucide-react";
+import { ChevronDown, Filter } from "lucide-react";
 import SelectLanguage from "./SelectLanguage";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -27,7 +27,7 @@ const SortAndFilter = () => {
     <div className="bg-gray-800 rounded-lg shadow-md mb-8 overflow-hidden border border-gray-700">
     <div className="p-4 sm:p-6">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div className="w-full sm:w-1/2 lg:w-1/3">
+        {/* <div className="w-full sm:w-1/2 lg:w-1/3">
           <div className="relative">
             <input
               type="text"
@@ -36,7 +36,7 @@ const SortAndFilter = () => {
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
           </div>
-        </div>
+        </div> */}
         <div className="flex items-center space-x-2 sm:space-x-4">
           <Sorting/>
           <button 
