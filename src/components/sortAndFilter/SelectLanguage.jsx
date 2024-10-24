@@ -1,31 +1,21 @@
 import { useEffect, useRef, useState } from "react";
-import { FaAngleDown } from "react-icons/fa";
-import { FaAngleUp } from "react-icons/fa";
-import useDetectOutsideClick from "../../utils/useDetectOutsideClick";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLanguageValue } from "../../redux/features/movieSlice";
 import { axiosInstance } from "../../utils/axiosInstance";
 
 const SelectLanguage = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState([]);
-  const [isLanguage, setIsLanguage] = useState(false);
   const [allLanguages, setAllLanguages] = useState([]);
   const dispatch = useDispatch();
   const dropdownRef = useRef(null);
 
   const handleLanguageSelect = option => {
     dispatch(setLanguageValue(option));
-    setSelectedLanguage(option);
-    setIsLanguage(false);
   };
 
-  useDetectOutsideClick(dropdownRef, () => {
-    setIsLanguage(false);
-  });
 
   const handleGetLanguages = async () => {
     try {
-      const response = await axiosInstance("configuration/languages");
+      const response = await axiosInstance("getLanguages");
       setAllLanguages(response.data);
     } catch (error) {
       console.log(error);
@@ -35,32 +25,17 @@ const SelectLanguage = () => {
     handleGetLanguages();
   }, []);
 
-
   return (
     <div className="dropdown" ref={dropdownRef}>
-      <button
-        className="dropdown_toggle"
-        onClick={() => setIsLanguage(!isLanguage)}
-      >
-        Select Language{" "}
-        <span>{isLanguage ? <FaAngleUp /> : <FaAngleDown />}</span>
-      </button>
-      {isLanguage && (
-        <div className="dropdown_menu">
-          {allLanguages.map(lang => (
-            <div
-              key={lang.iso_639_1}
-              style={{
-                background:
-                  selectedLanguage === lang.iso_639_1 ? "#D9D9D9" : "",
-              }}
-              onClick={() => handleLanguageSelect(lang.iso_639_1)}
-            >
-              {lang.english_name}
-            </div>
-          ))}
-        </div>
-      )}
+      <h3 className="font-semibold mb-2 text-gray-200">Language</h3>
+      <select className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white" onChange={handleLanguageSelect}>
+        {allLanguages.map(lang => (
+          <>
+            <option>All Languages</option>
+            <option value={lang.iso_639_1} key={lang.iso_639_1}>lang.english_name</option>
+          </>
+        ))}
+      </select>
     </div>
   );
 };

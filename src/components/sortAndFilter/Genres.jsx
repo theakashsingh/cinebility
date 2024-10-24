@@ -7,7 +7,7 @@ const Genres = () => {
   const [allGenres, setAllGenres] = useState([]);
   const [result, setResult] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleGetGenres = async () => {
     try {
@@ -21,9 +21,9 @@ const Genres = () => {
     handleGetGenres();
   }, []);
 
-  useEffect(()=>{
-    dispatch(setGenresValue(result))
-  },[result])
+  useEffect(() => {
+    dispatch(setGenresValue(result));
+  }, [result]);
 
   const handleSelectGenres = genres_id => {
     console.log({ genres_id });
@@ -41,22 +41,25 @@ const Genres = () => {
   };
 
   return (
-    <div className="genres">
-      {allGenres.map(genres => (
-        <span
-          key={genres.id}
-          style={{
-            backgroundColor: selectedGenres.includes(genres.id)
-              ? "#D9D9D9"
-              : "",
-          }}
-          onClick={() => {
-            handleSelectGenres(genres.id);
-          }}
-        >
-          {genres.name}
-        </span>
-      ))}
+    <div>
+      <h3 className="font-semibold mb-2 text-gray-200">Genre</h3>
+      <div className="space-y-2">
+        {allGenres.map(genre => (
+          <label
+            key={genre.id}
+            onClick={() => {
+              handleSelectGenres(genre.id);
+            }}
+            className="flex items-center space-x-2 text-gray-300"
+          >
+            <input
+              type="checkbox"
+              className="form-checkbox text-blue-500 bg-gray-600 border-gray-500"
+            />
+            <span>{genre.name}</span>
+          </label>
+        ))}
+      </div>
     </div>
   );
 };

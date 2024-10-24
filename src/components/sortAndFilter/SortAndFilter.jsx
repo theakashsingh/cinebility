@@ -48,32 +48,31 @@
 //   );
 // };
 
-// export default SortAndFilter;
-
 import Genres from "./Genres";
 import "./SortAndFilter.css";
 import Sorting from "./Sorting";
-// import { getMovies, setSortAndFilter } from "../../redux/features/movieSlice";
-// import { useNavigate } from "react-router-dom";
+import { getMovies } from "../../redux/features/movieSlice";
 import { useState } from "react";
 import { ChevronDown, Filter, Search } from "lucide-react";
+import SelectLanguage from "./SelectLanguage";
+import { useDispatch, useSelector } from "react-redux";
 
 const SortAndFilter = () => {
   const [isFilterExpanded, setIsFilterExpanded] = useState(false);
-  // const { sorting, language, genres } = useSelector(state => state.movie);
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate()
-  // const sortAndFilter = () => {
-  //   dispatch(
-  //     getMovies({
-  //       pageNo: 1,
-  //       sorting: sorting,
-  //       genres: genres,
-  //       language: language,
-  //     })
-  //   );
-  //   dispatch(setSortAndFilter(false));
-  // };
+  const { sorting, language, genres } = useSelector(state => state.movie);
+  const dispatch = useDispatch();
+  const sortAndFilter = () => {
+    dispatch(
+      getMovies({
+        pageNo: 1,
+        sorting: sorting,
+        genres: genres,
+        language: language,
+      })
+    );
+    // dispatch(setSortAndFilter(false));
+    setIsFilterExpanded(false)
+  };
   return (
     <div className="bg-gray-800 rounded-lg shadow-md mb-8 overflow-hidden border border-gray-700">
     <div className="p-4 sm:p-6">
@@ -104,13 +103,8 @@ const SortAndFilter = () => {
     {isFilterExpanded && (
       <div className="bg-gray-750 p-4 sm:p-6 border-t border-gray-700">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div>
-            <h3 className="font-semibold mb-2 text-gray-200">Genre</h3>
-            <div className="space-y-2">
-              <Genres/>
-            </div>
-          </div>
-          <div>
+          <Genres/>
+          {/* <div>
             <h3 className="font-semibold mb-2 text-gray-200">Rating</h3>
             <input 
               type="range" 
@@ -123,8 +117,8 @@ const SortAndFilter = () => {
               <span>0</span>
               <span>5</span>
             </div>
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <h3 className="font-semibold mb-2 text-gray-200">Release Year</h3>
             <select className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white">
               <option>All Years</option>
@@ -133,20 +127,13 @@ const SortAndFilter = () => {
               <option>2021</option>
               <option>2020</option>
             </select>
-          </div>
+          </div> */}
           <div>
-            <h3 className="font-semibold mb-2 text-gray-200">Language</h3>
-            <select className="w-full p-2 rounded border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white">
-              <option>All Languages</option>
-              <option>English</option>
-              <option>Spanish</option>
-              <option>French</option>
-              <option>Japanese</option>
-            </select>
+            <SelectLanguage/>
           </div>
         </div>
         <div className="mt-4 flex justify-end">
-          <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
+          <button onClick={sortAndFilter} className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300">
             Apply Filters
           </button>
         </div>
